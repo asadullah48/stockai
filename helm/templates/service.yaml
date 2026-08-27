@@ -1,0 +1,15 @@
+apiVersion: v1
+kind: Service
+metadata:
+  name: {{ .Release.Name }}-stockai
+  labels:
+    app.kubernetes.io/name: stockai
+spec:
+  type: {{ .Values.service.type }}
+  ports:
+    - port: {{ .Values.service.port }}
+      targetPort: 8019
+      protocol: TCP
+      name: http
+  selector:
+    app.kubernetes.io/name: stockai

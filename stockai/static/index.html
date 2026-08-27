@@ -1,0 +1,151 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>StockAI | Autonomous Supply Chain & Inventory Automation Framework</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;600;700;800&family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&family=JetBrains+Mono:wght@400;600&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="/static/style.css">
+</head>
+<body>
+  <div class="glow-sphere glow-teal"></div>
+  <div class="glow-sphere glow-amber"></div>
+
+  <header class="app-header">
+    <div class="header-container">
+      <div class="brand">
+        <div class="brand-icon">
+          <svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2">
+            <path d="M21 8a2 2 0 0 0-1-1.73l-7-4a2 2 0 0 0-2 0l-7 4A2 2 0 0 0 3 8v8a2 2 0 0 0 1 1.73l7 4a2 2 0 0 0 2 0l7-4A2 2 0 0 0 21 16z"/>
+            <path d="m3.3 7 8.7 5 8.7-5"/>
+            <path d="M12 22V12"/>
+          </svg>
+        </div>
+        <div class="brand-info">
+          <h1>Stock<span class="gradient-text">AI</span></h1>
+          <span class="brand-badge" data-i18n="badgeTitle">Inventory Automation</span>
+        </div>
+      </div>
+
+      <div class="header-actions">
+        <a href="https://asadullahshafique-devunity.vercel.app" target="_blank" class="btn btn-secondary btn-sm" style="text-decoration:none;">
+          <span>👨‍💻 DevUnity Portfolio</span>
+        </a>
+
+        <div class="live-status">
+          <span class="pulse-dot"></span>
+          <span id="gatewayStatus" data-i18n="statusLive">Supply Chain Harness Active (:8019)</span>
+        </div>
+
+        <button id="langToggleBtn" class="btn btn-outline btn-sm" onclick="toggleLanguage()">
+          <span id="langLabel">العربية</span>
+        </button>
+      </div>
+    </div>
+  </header>
+
+  <main class="app-main">
+    <section class="hero-section">
+      <h2 data-i18n="heroTitle">Autonomous Stock Monitoring, Demand Forecasting & PO Automation</h2>
+      <p data-i18n="heroSubtitle">Eliminate stockouts and excess inventory costs with MonitorAgent (velocity tracking), ForecastAgent (30-day seasonal demand), and OrderAgent (automated supplier PO & email drafting).</p>
+    </section>
+
+    <section class="metrics-grid">
+      <div class="metric-card glass">
+        <span class="metric-label" data-i18n="metric1Label">Stockout Prevention</span>
+        <div class="metric-value gradient-text">99.4% Uptime</div>
+        <span class="metric-sub" data-i18n="metric1Sub">Buffer ROP Calculation</span>
+      </div>
+      <div class="metric-card glass">
+        <span class="metric-label" data-i18n="metric2Label">Demand Accuracy</span>
+        <div class="metric-value">96.4% Fit</div>
+        <span class="metric-sub" data-i18n="metric2Sub">Seasonal Multipliers</span>
+      </div>
+      <div class="metric-card glass">
+        <span class="metric-label" data-i18n="metric3Label">Reorder Latency</span>
+        <div class="metric-value">&lt; 10ms</div>
+        <span class="metric-sub" data-i18n="metric3Sub">Instant PO Drafting</span>
+      </div>
+      <div class="metric-card glass">
+        <span class="metric-label" data-i18n="metric4Label">SME Working Capital</span>
+        <div class="metric-value">+32% Optimized</div>
+        <span class="metric-sub" data-i18n="metric4Sub">Zero Excess Holding</span>
+      </div>
+    </section>
+
+    <section class="studio-section">
+      <div class="section-header">
+        <div>
+          <h3 data-i18n="studioTitle">Autonomous Inventory Control Studio</h3>
+          <p class="section-desc" data-i18n="studioDesc">Inspect real-time SKU stock levels, trigger automated demand forecasting, and review generated supplier purchase order drafts.</p>
+        </div>
+      </div>
+
+      <div class="studio-layout">
+        <div class="panel glass">
+          <div class="preset-box">
+            <span class="preset-label" data-i18n="lblPresets">Select Preset SKU Scenario:</span>
+            <div class="preset-buttons" id="scenarioButtons">
+              <!-- JS Rendered -->
+            </div>
+          </div>
+
+          <div class="form-row">
+            <div class="form-group" style="flex:1;">
+              <label data-i18n="lblSKU">SKU Code</label>
+              <input type="text" id="skuInput" class="input-control" value="SKU-9920">
+            </div>
+            <div class="form-group" style="flex:1;">
+              <label data-i18n="lblCurrentStock">Current Stock</label>
+              <input type="number" id="stockInput" class="input-control" value="14">
+            </div>
+          </div>
+
+          <div class="form-row">
+            <div class="form-group" style="flex:1;">
+              <label data-i18n="lblSafety">Safety Threshold</label>
+              <input type="number" id="safetyInput" class="input-control" value="25">
+            </div>
+            <div class="form-group" style="flex:1;">
+              <label data-i18n="lblRunRate">Daily Run Rate</label>
+              <input type="number" step="0.5" id="rateInput" class="input-control" value="4.5">
+            </div>
+          </div>
+
+          <button class="btn btn-primary btn-block" onclick="runInventoryPipeline()" id="processBtn">
+            <span data-i18n="btnExecuteProcess">📦 Execute Stock Pipeline & Draft PO</span>
+          </button>
+        </div>
+
+        <div class="panel glass output-panel">
+          <div class="panel-header">
+            <span class="panel-title" data-i18n="titlePurchaseOrder">Draft Supplier Purchase Order</span>
+            <span id="stockBadge" class="badge badge-warning">REORDER TRIGGERED</span>
+          </div>
+
+          <div class="pipeline-summary" id="pipelineBar">
+            <span class="pipe-tag">ETA to Stockout: 3.1 Days</span>
+            <span class="pipe-tag">Demand (30D): 169 Units</span>
+            <span class="pipe-tag">Reorder Qty: 180 Units</span>
+            <span class="pipe-tag">Total PO: $4,410.00</span>
+          </div>
+
+          <div class="terminal-box">
+            <span class="terminal-header" data-i18n="lblEmailDraft">Automated Supplier Reorder Email:</span>
+            <pre><code id="emailStream" class="code-block">Executing inventory pipeline...</code></pre>
+          </div>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <footer class="app-footer">
+    <p style="margin-bottom:6px;"><a href="https://asadullahshafique-devunity.vercel.app" target="_blank" style="color:var(--accent-teal); text-decoration:none; font-weight:600;">← Back to Asadullah Shafique Portfolio (DevUnity)</a></p>
+    <p>© 2026 StockAI • Autonomous Inventory Framework • <a href="https://github.com/asadullah48/stockai" target="_blank">GitHub Repository</a></p>
+  </footer>
+
+  <script src="/static/app.js"></script>
+</body>
+</html>

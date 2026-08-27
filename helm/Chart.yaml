@@ -1,0 +1,11 @@
+apiVersion: v2
+name: stockai
+description: Helm chart for StockAI Autonomous Supply Chain & Inventory Automation Multi-Agent Framework
+type: application
+version: 1.0.0
+appVersion: "1.0.0"
+keywords:
+  - inventory-automation
+  - demand-forecasting
+  - reorder-agent
+  - supply-chain
