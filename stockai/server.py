@@ -42,7 +42,7 @@ def healthz():
 
 @app.get("/readyz")
 def readyz():
-    return {"status": "ready", "supply_chain_agents_active": 3}
+    return {"status": "ready", "supply_chain_agents_active": 4}
 
 @app.post("/api/v1/inventory/process-sku", response_model=InventoryAutomationPipelineResult)
 def process_sku(item: SKUInventoryItem):

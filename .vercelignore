@@ -1,0 +1,9 @@
+tests
+helm
+Dockerfile
+docker-compose.yml
+.pytest_cache
+__pycache__
+*.pyc
+.git
+SPEC.md

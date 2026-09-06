@@ -24,6 +24,11 @@ dev = [
     "pytest-asyncio>=0.23.0"
 ]
 
+[tool.setuptools.packages.find]
+# Flat layout also has an api/ dir (Vercel serverless entrypoint) at repo root;
+# scope package discovery to stockai/ only so builds don't treat api/ as a package.
+include = ["stockai*"]
+
 [tool.pytest.ini_options]
 testpaths = ["tests"]
 python_files = ["test_*.py"]

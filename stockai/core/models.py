@@ -36,6 +36,12 @@ class DemandForecast(BaseModel):
     recommended_reorder_quantity: int
     confidence_interval_percent: float
 
+class ExecutiveInsight(BaseModel):
+    sku: str
+    summary: str
+    source: str  # e.g. "ollama:llama3.2" or "template-fallback"
+    generated_at: float = Field(default_factory=time.time)
+
 class PurchaseOrderDraft(BaseModel):
     po_number: str
     sku: str
@@ -54,6 +60,7 @@ class InventoryAutomationPipelineResult(BaseModel):
     sku_item: SKUInventoryItem
     monitoring: StockMonitoringReport
     forecast: DemandForecast
+    insight: ExecutiveInsight
     purchase_order: PurchaseOrderDraft
     automation_latency_ms: float
     processed_at: float = Field(default_factory=time.time)

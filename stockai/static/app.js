@@ -25,6 +25,7 @@ const TRANSLATIONS = {
     lblRunRate: "Daily Run Rate",
     btnExecuteProcess: "📦 Execute Stock Pipeline & Draft PO",
     titlePurchaseOrder: "Draft Supplier Purchase Order",
+    lblInsight: "🧠 InsightAgent Executive Summary:",
     lblEmailDraft: "Automated Supplier Reorder Email:"
   },
   ar: {
@@ -49,6 +50,7 @@ const TRANSLATIONS = {
     lblRunRate: "معدل السحب اليومي",
     btnExecuteProcess: "📦 تشغيل دورة المخزون وتوليد أمر الشراء",
     titlePurchaseOrder: "مسودة أمر شراء المورد (PO)",
+    lblInsight: "🧠 الملخص التنفيذي لوكيل الرؤى:",
     lblEmailDraft: "البريد الإلكتروني المؤتمت لإعادة الطلب:"
   }
 };
@@ -169,6 +171,12 @@ function renderPipelineResult(data) {
   `;
 
   document.getElementById('emailStream').innerText = data.purchase_order.email_body_draft;
+
+  document.getElementById('insightStream').innerText = data.insight.summary;
+  const sourceBadge = document.getElementById('insightSourceBadge');
+  const isLLM = data.insight.source.startsWith('ollama:');
+  sourceBadge.innerText = isLLM ? `LLM · ${data.insight.source}` : 'rule-based template';
+  sourceBadge.className = isLLM ? 'badge badge-success' : 'badge badge-warning';
 }
 
 window.addEventListener('DOMContentLoaded', init);

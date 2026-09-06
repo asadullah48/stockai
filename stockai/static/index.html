@@ -49,7 +49,7 @@
   <main class="app-main">
     <section class="hero-section">
       <h2 data-i18n="heroTitle">Autonomous Stock Monitoring, Demand Forecasting & PO Automation</h2>
-      <p data-i18n="heroSubtitle">Eliminate stockouts and excess inventory costs with MonitorAgent (velocity tracking), ForecastAgent (30-day seasonal demand), and OrderAgent (automated supplier PO & email drafting).</p>
+      <p data-i18n="heroSubtitle">Eliminate stockouts and excess inventory costs with MonitorAgent (velocity tracking), ForecastAgent (30-day seasonal demand), InsightAgent (LLM-generated executive summaries via Ollama), and OrderAgent (automated supplier PO & email drafting).</p>
     </section>
 
     <section class="metrics-grid">
@@ -130,6 +130,14 @@
             <span class="pipe-tag">Demand (30D): 169 Units</span>
             <span class="pipe-tag">Reorder Qty: 180 Units</span>
             <span class="pipe-tag">Total PO: $4,410.00</span>
+          </div>
+
+          <div class="terminal-box">
+            <div class="panel-header" style="margin-bottom:0;">
+              <span class="terminal-header" data-i18n="lblInsight">🧠 InsightAgent Executive Summary:</span>
+              <span id="insightSourceBadge" class="badge badge-warning">template-fallback</span>
+            </div>
+            <p id="insightStream" class="code-block" style="font-family:var(--font-sans); color:var(--text-main);">Executing inventory pipeline...</p>
           </div>
 
           <div class="terminal-box">

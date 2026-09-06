@@ -16,7 +16,7 @@ def test_server_healthz():
 def test_server_readyz():
     res = client.get("/readyz")
     assert res.status_code == 200
-    assert res.json()["supply_chain_agents_active"] == 3
+    assert res.json()["supply_chain_agents_active"] == 4
 
 def test_server_process_sku_api():
     payload = {
