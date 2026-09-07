@@ -144,6 +144,34 @@ The same FastAPI `app` object is reused across both targets — nothing is dupli
 
 Python 3.10+ · FastAPI · Pydantic v2 · Uvicorn · httpx · Ollama (optional, local LLM) · pytest · Docker · Vercel
 
+## 🤖 Agentic AI Alignment
+
+- **Autonomy** — `StockAIEngine.process_sku()` runs Monitor→Forecast→
+  Insight→Order end-to-end per SKU with no human step in between; the
+  agents decide the reorder point, the forecast, the narrative, and the
+  draft PO on their own.
+- **Resilience** — `InsightAgent` tries a local Ollama LLM first and, if
+  it's unavailable, falls back *instantly* to a deterministic rule-based
+  template — the pipeline degrades gracefully instead of failing when the
+  LLM step is down, and every response reports which path (`source`) it
+  actually took.
+- **Adaptivity** — `MonitorAgent`'s reorder-point math and `ForecastAgent`'s
+  seasonal projection are both parameterized off live stock/demand data per
+  call, so the same four agents adapt their output per-SKU without any
+  retraining or redeploy.
+
+### Roadmap: from single-SKU pipeline to multi-agent orchestration
+
+- Fan `StockAIEngine` out across a full catalog concurrently (it currently
+  processes one SKU per call) — the four agents are already stateless and
+  independently testable, so this is an orchestration change, not a
+  rewrite.
+- Swap the direct Ollama HTTP call in `InsightAgent` for an MCP tool call,
+  so the same insight step can plug into a larger multi-agent supply-chain
+  system instead of only this service.
+- Move from the current Docker/Vercel targets to a Kubernetes deployment
+  with autoscaling per agent stage, once catalog-wide fan-out is in place.
+
 ## License
 
 Apache 2.0 — see [LICENSE](https://opensource.org/licenses/Apache-2.0).
